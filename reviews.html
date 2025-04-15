@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отзывы | Библиотека "Адель"</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Основные стили */
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Стили для шапки (используйте свои из предыдущего примера) */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Секция отзывов */
+        .reviews-section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .review-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .review-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 3px solid #f1f1f1;
+        }
+        
+        .review-author {
+            font-weight: 500;
+            margin: 0;
+            color: #2c3e50;
+        }
+        
+        .review-date {
+            color: #777;
+            font-size: 0.9rem;
+            margin: 5px 0 0;
+        }
+        
+        .review-rating {
+            color: #f39c12;
+            margin: 5px 0;
+        }
+        
+        .review-text {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .review-form {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .form-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .rating-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .rating-label {
+            margin-right: 15px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .rating-stars {
+            display: flex;
+            direction: rtl; /* Для удобства выбора рейтинга */
+        }
+        
+        .rating-stars input {
+            display: none;
+        }
+        
+        .rating-stars label {
+            color: #ddd;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .rating-stars input:checked ~ label,
+        .rating-stars label:hover,
+        .rating-stars label:hover ~ label {
+            color: #f39c12;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+        }
+        
+        /* Подвал */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .review-form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <h1><a href="index.html">Научно-техническая библиотека "Адель"</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="services.html">Услуги</a></li>
+                    <li><a href="reviews.html" class="active">Отзывы</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="reviews-section">
+            <div class="container">
+                <h2 class="section-title">Отзывы наших читателей</h2>
+                
+                <div class="reviews-container" id="reviewsContainer">
+                    <!-- Отзывы будут загружены через JavaScript -->
+                </div>
+                
+                <div class="review-form">
+                    <h3 class="form-title">Оставить отзыв</h3>
+                    <form id="addReviewForm">
+                        <div class="form-group">
+                            <label for="reviewName">Ваше имя</label>
+                            <input type="text" id="reviewName" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reviewText">Текст отзыва</label>
+                            <textarea id="reviewText" class="form-control" required></textarea>
+                        </div>
+                        
+                        <div class="rating-container">
+                            <span class="rating-label">Оценка:</span>
+                            <div class="rating-stars">
+                                <input type="radio" id="star5" name="rating" value="5">
+                                <label for="star5">★</label>
+                                <input type="radio" id="star4" name="rating" value="4">
+                                <label for="star4">★</label>
+                                <input type="radio" id="star3" name="rating" value="3">
+                                <label for="star3">★</label>
+                                <input type="radio" id="star2" name="rating" value="2">
+                                <label for="star2">★</label>
+                                <input type="radio" id="star1" name="rating" value="1">
+                                <label for="star1">★</label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Отправить отзыв</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Научно-техническая библиотека "Адель". Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Массив с отзывами
+        const reviews = [
+            {
+                id: 1,
+                name: "Александр Петров",
+                avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+                date: "15.10.2023",
+                rating: 5,
+                text: "Отличная библиотека с богатым выбором научной литературы. Особенно впечатлил отдел физики и математики. Персонал всегда готов помочь с поиском нужных материалов."
+            },
+            {
+                id: 2,
+                name: "Екатерина Смирнова",
+                avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+                date: "10.10.2023",
+                rating: 4,
+                text: "Очень удобный читальный зал с комфортными рабочими местами. Не хватает только большего количества розеток для ноутбуков. В остальном - всё прекрасно!"
+            },
+            {
+                id: 3,
+                name: "Дмитрий Иванов",
+                avatar: "https://randomuser.me/api/portraits/men/67.jpg",
+                date: "05.10.2023",
+                rating: 5,
+                text: "Лучшая техническая библиотека в городе! Регулярно посещаю уже 2 года. Всегда нахожу нужные книги и журналы. Особенно ценю возможность доступа к электронным ресурсам."
+            },
+            {
+                id: 4,
+                name: "Ольга Васильева",
+                avatar: "https://randomuser.me/api/portraits/women/63.jpg",
+                date: "28.09.2023",
+                rating: 5,
+                text: "Большое спасибо за профессиональную консультацию по подбору литературы для моей диссертации. Сэкономили мне массу времени! Теперь рекомендую вашу библиотеку всем коллегам."
+            },
+            {
+                id: 5,
+                name: "Иван Козлов",
+                avatar: "https://randomuser.me/api/portraits/men/85.jpg",
+                date: "20.09.2023",
+                rating: 4,
+                text: "Хороший выбор книг, приятная атмосфера. Хотелось бы видеть более современную мебель в читальных залах. В остальном - всё на высшем уровне."
+            },
+            {
+                id: 6,
+                name: "Мария Новикова",
+                avatar: "https://randomuser.me/api/portraits/women/29.jpg",
+                date: "12.09.2023",
+                rating: 5,
+                text: "Впервые посетила ваше мероприятие - лекцию по квантовой физике. Осталась в восторге! Отличная организация и потрясающий спикер. Обязательно приду ещё."
+            }
+        ];
+
+        // Функция для отображения отзывов
+        function displayReviews() {
+            const container = document.getElementById('reviewsContainer');
+            container.innerHTML = '';
+            
+            reviews.forEach(review => {
+                const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                
+                const reviewElement = document.createElement('div');
+                reviewElement.className = 'review-card';
+                reviewElement.innerHTML = `
+                    <div class="review-header">
+                        <img src="${review.avatar}" alt="${review.name}" class="review-avatar">
+                        <div>
+                            <h3 class="review-author">${review.name}</h3>
+                            <p class="review-date">${review.date}</p>
+                        </div>
+                    </div>
+                    <div class="review-rating" title="${review.rating} из 5">${stars}</div>
+                    <p class="review-text">${review.text}</p>
+                `;
+                
+                container.appendChild(reviewElement);
+            });
+        }
+
+        // Функция для добавления нового отзыва
+        function addNewReview(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('reviewName').value;
+            const text = document.getElementById('reviewText').value;
+            const rating = document.querySelector('input[name="rating"]:checked')?.value;
+            
+            if (!name || !text || !rating) {
+                alert('Пожалуйста, заполните все поля и поставьте оценку');
+                return;
+            }
+            
+            const newReview = {
+                id: reviews.length + 1,
+                name: name,
+                avatar: `https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random() * 100)}.jpg`,
+                date: new Date().toLocaleDateString('ru-RU'),
+                rating: parseInt(rating),
+                text: text
+            };
+            
+            reviews.unshift(newReview); // Добавляем в начало массива
+            displayReviews();
+            
+            // Очищаем форму
+            document.getElementById('addReviewForm').reset();
+            
+            // Прокручиваем к новому отзыву
+            document.getElementById('reviewsContainer').scrollIntoView({ behavior: 'smooth' });
+            
+            alert('Спасибо за ваш отзыв!');
+        }
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            displayReviews();
+            document.getElementById('addReviewForm').addEventListener('submit', addNewReview);
+        });
+    </script>
+</body>
+</html>

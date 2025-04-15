@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги | Библиотека "Адель"</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Основные стили */
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Стили для шапки (используйте свои из предыдущего примера) */
+        
+        /* Секция услуг */
+        .services-section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .service-card:hover .service-img img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .service-price {
+            font-weight: 500;
+            color: #e74c3c;
+            font-size: 1.2rem;
+            margin: 15px 0;
+        }
+        
+        .service-description {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            background: linear-gradient(135deg, #2980b9, #3498db);
+        }
+        
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow: auto;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .modal.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            transform: translateY(-50px);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+        
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            color: #2c3e50;
+            margin-top: 0;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+        
+        /* Подвал */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка (используйте свою из предыдущего примера) -->
+    <header>
+        <div class="container">
+            <h1><a href="index.html">Научно-техническая библиотека "Адель"</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="services.html" class="active">Услуги</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="reviews.html">Отзывы</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="services-section">
+            <div class="container">
+                <h2 class="section-title">Наши услуги</h2>
+                
+                <div class="services-grid">
+                    <!-- Услуга 1 -->
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Абонемент">
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Абонемент</h3>
+                            <p class="service-description">Возможность брать книги домой на срок до 30 дней. Доступ ко всем разделам библиотеки.</p>
+                            <div class="service-price">500 руб./месяц</div>
+                            <button class="btn book-btn" data-service="Абонемент">Записаться</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Услуга 2 -->
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Читальный зал">
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Читальный зал</h3>
+                            <p class="service-description">Комфортные рабочие места с доступом к редким изданиям и справочной литературе.</p>
+                            <div class="service-price">Бесплатно</div>
+                            <button class="btn book-btn" data-service="Читальный зал">Записаться</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Услуга 3 -->
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://images.unsplash.com/photo-1555421689-3f034debb7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Консультация">
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Профессиональная консультация</h3>
+                            <p class="service-description">Помощь в подборе литературы и поиске информации по вашему запросу.</p>
+                            <div class="service-price">1000 руб./час</div>
+                            <button class="btn book-btn" data-service="Профессиональная консультация">Записаться</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Услуга 4 -->
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Копирование">
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Копирование и сканирование</h3>
+                            <p class="service-description">Возможность сделать копии или сканы нужных страниц из книг и журналов.</p>
+                            <div class="service-price">20 руб./страница</div>
+                            <button class="btn book-btn" data-service="Копирование и сканирование">Записаться</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Услуга 5 -->
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Мероприятия">
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Участие в мероприятиях</h3>
+                            <p class="service-description">Доступ к лекциям, мастер-классам и встречам с авторами.</p>
+                            <div class="service-price">300-1000 руб.</div>
+                            <button class="btn book-btn" data-service="Участие в мероприятиях">Записаться</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Услуга 6 -->
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Электронные ресурсы">
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Доступ к электронным ресурсам</h3>
+                            <p class="service-description">Подписка на научные базы данных и электронные библиотеки.</p>
+                            <div class="service-price">800 руб./месяц</div>
+                            <button class="btn book-btn" data-service="Доступ к электронным ресурсам">Записаться</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Модальное окно записи -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 class="modal-title">Запись на услугу: <span id="serviceName"></span></h3>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="name">Ваше имя</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Желаемая дата</label>
+                    <input type="date" id="date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Желаемое время</label>
+                    <input type="time" id="time" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="comments">Комментарий (необязательно)</label>
+                    <textarea id="comments" class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Отправить заявку</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Научно-техническая библиотека "Адель". Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Открытие модального окна
+        document.querySelectorAll('.book-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const serviceName = this.getAttribute('data-service');
+                document.getElementById('serviceName').textContent = serviceName;
+                document.getElementById('bookingModal').classList.add('show');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        
+        // Закрытие модального окна
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            document.getElementById('bookingModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Закрытие при клике вне окна
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('bookingModal')) {
+                document.getElementById('bookingModal').classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Обработка формы
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Здесь можно добавить AJAX-запрос для отправки данных
+            alert('Ваша заявка отправлена! Мы свяжемся с вами в ближайшее время.');
+            
+            // Закрываем модальное окно
+            document.getElementById('bookingModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+            
+            // Очищаем форму
+            this.reset();
+        });
+    </script>
+</body>
+</html>

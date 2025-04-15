@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Научно-техническая библиотека "Адель"</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Научно-техническая библиотека "Адель"</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="services.html">Услуги</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="reviews.html">Отзывы</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="home">
+            <h2>Добро пожаловать в библиотеку "Адель"</h2>
+            <p>Мы предлагаем широкий выбор научной и технической литературы.</p>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Поиск книг...">
+                <button id="search-btn">Найти</button>
+            </div>
+            <div class="advantages">
+                <h2>Почему выбирают нашу библиотеку?</h2>
+                <div class="advantages-grid">
+                    <div class="advantage-item">
+                        <div class="advantage-img">
+                            <img src="data:image/jpeg;base64,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" alt="Большой выбор">
+                            <div class="advantage-text">
+                                <h3>Большой выбор</h3>
+                                <p>Более 50 000 научных изданий по всем отраслям знаний</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="advantage-item">
+                        <div class="advantage-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLqfCCq28sCMN2H6KyegygAHa17OI2WqS8Eg&s" alt="Современные технологии">
+                            <div class="advantage-text">
+                                <h3>Современные технологии</h3>
+                                <p>Электронный каталог, онлайн-бронирование и удобный поиск</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="advantage-item">
+                        <div class="advantage-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPyLjFOZTR6z8JHPAORYnQDSyGN9-UolG-wQ&s" alt="Профессиональные консультации">
+                            <div class="advantage-text">
+                                <h3>Профессиональные консультации</h3>
+                                <p>Наши специалисты помогут подобрать нужную литературу</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="advantage-item">
+                        <div class="advantage-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrJN1lfIG761smMrZ27RaEQ1W0Rxbi9EaElQ&s" alt="Удобное расположение">
+                            <div class="advantage-text">
+                                <h3>Удобное расположение</h3>
+                                <p>Центральное расположение и комфортные зоны для работы</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="catalog">
+            <h2>Каталог книг</h2>
+            <div class="books-container" id="books-list">
+                <!-- Книги будут загружены через JavaScript -->
+            </div>
+        </section>
+
+        <!-- Добавляем секцию для отображения одной книги -->
+        <section id="book-details" style="display: none;">
+            <h2 id="book-detail-title"></h2>
+            <div class="book-detail-container">
+                <img id="book-detail-image" src="" alt="" class="book-detail-cover">
+                <div class="book-detail-info">
+                    <p><strong>Автор:</strong> <span id="book-detail-author"></span></p>
+                    <p><strong>Год издания:</strong> <span id="book-detail-year"></span></p>
+                    <p><strong>Категория:</strong> <span id="book-detail-category"></span></p>
+                    <p><strong>Описание:</strong> <span id="book-detail-description"></span></p>
+                </div>
+            </div>
+            <button id="back-to-catalog" class="back-btn">Вернуться в каталог</button>
+        </section>
+
+        <section id="catalog">
+            <h2>Каталог книг</h2>
+            <div class="add-book-form">
+                <h3>Добавить новую книгу</h3>
+                <input type="text" id="book-title" placeholder="Название книги">
+                <input type="text" id="book-author" placeholder="Автор">
+                <input type="number" id="book-year" placeholder="Год издания">
+                <input type="text" id="book-category" placeholder="Категория">
+                <input type="text" id="book-image" placeholder="URL изображения">
+                <button id="add-book-btn">Добавить книгу</button>
+            </div>
+            <div class="books-container" id="books-list">
+                
+            </div>
+
+        <section id="about">
+            <h2>О нашей библиотеке</h2>
+            <p>Библиотека "Адель" была основана в 2018 году и с тех пор является ведущим поставщиком научной и технической литературы в регионе.</p>
+            <p>Погрузитесь в мир передовых научно-технических знаний с нашей специализированной онлайн-библиотекой. Мы предлагаем глубокий и актуальный контент, охватывающий широкий спектр инженерных дисциплин, фундаментальных наук и прикладных исследований. <br>Идеальный ресурс для ученых, инженеров, студентов и специалистов, стремящихся быть в курсе последних достижений.</p>
+        </section>
+
+        <section id="contact">
+            <h2>Контакты</h2>
+            <p>Адрес: г. Нижнекамск, ул. Лесная, д. 1а</p>
+            <p>Телефон: +7 (917) 899-01-73</p>
+            <p>Email: saripovadel40@gmail.com</p>
+            <p>Часы работы: Пн-Пт с 9:00 до 20:00, Сб с 10:00 до 18:00</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Научно-техническая библиотека "Адель". Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
